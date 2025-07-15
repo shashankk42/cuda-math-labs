@@ -1,0 +1,40 @@
+site_name: CUDA Math Labs
+site_description: High-performance CUDA math library research and contributions
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: green
+      accent: green
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+    - search.suggest
+
+plugins:
+  - search
+  - mkdocs-jupyter
+
+nav:
+  - Home: index.md
+  - Theory:
+    - Numerical Linear Algebra: theory/numerical_linear_algebra.md
+    - Floating Point Arithmetic: theory/floating_point.md
+    - Parallel Algorithms: theory/parallel_algorithms.md
+  - Benchmarks:
+    - Roofline Analysis: benchmarks/roofline.md
+    - Accuracy Studies: benchmarks/accuracy.md
+  - Notebooks: 
+    - notebooks/
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js

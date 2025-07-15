@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# CUDA
+*.o
+*.so
+*.a
+*.ptx
+*.cubin
+
+# Build directories
+build/
+dist/
+*.egg-info/
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# Benchmarks
+bench/results/*.json
+bench/results/*.csv
+bench/results/*.png
+
+# Documentation build
+site/
+
+# Temporary files
+*.tmp
+*.log

@@ -1,0 +1,3 @@
+[submodule ".github/workflows/libs/cuda-samples"]
+	path = .github/workflows/libs/cuda-samples
+	url = https://github.com/NVIDIA/cuda-samples.git
