@@ -1,23 +1,21 @@
 # CUDA Math Labs
 
-High-performance CUDA math library research and contributions for NVIDIA CUDA Math Libraries.
+High-performance CUDA math library implementations and contributions for NVIDIA CUDA Math Libraries.
 
-## Structure
-- `libs/` - Forked repositories and upstream PR mirrors
-- `bench/` - Reproducible benchmarks with JSON + plots  
-- `docs/` - MkDocs site with theory write-ups
-- `notebooks/` - Jupyter notebooks with roofline plots
-- `examples/` - Demo implementations and samples
-- `tests/` - Unit tests and accuracy validation
+## Day 1: Sanity Check
 
-## Quick Start
-```bash
-# Setup development environment
-./scripts/setup_dev.sh
+### What I Did
 
-# Run benchmarks
-./scripts/run_benchmarks.sh
+- Wrote a 10-line `printf("Hello from block %d thread %d")` kernel.
+- Compiled with `nvcc -arch=sm_89 -run`.
+- Verified device properties (`cudaGetDeviceProperties`) match driver.
 
-# Build documentation
-mkdocs serve
+### Key Take Aways
+
+- A kernel launch is `<<<grid, block>>>`; each thread sees its own block/thread IDs.
+- Always check `cudaDeviceProp.major/minor` before enabling Tensor Cores.
+
+### What I Read
+
+- CUDA Programming Guide §5 “Programming Model”.
 ```
