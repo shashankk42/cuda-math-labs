@@ -4,9 +4,10 @@ High-performance CUDA math library implementations and contributions for NVIDIA 
 
 ## Day 1: Sanity Check
 
+Scripts Created/ Updated: - **sanity_check.cu**
+
 ### What I Did
 
-- File: **sanity_check.cu**
 - Wrote a 10-line `printf("Hello from block %d thread %d")` kernel.
 - Compiled with `nvcc -arch=sm_89 -run`.
 - Verified device properties (`cudaGetDeviceProperties`) match driver.
@@ -22,15 +23,17 @@ High-performance CUDA math library implementations and contributions for NVIDIA 
 
 ## Day 2: VectorAdd Kernels & Bandwidth Benchmark
 
+Scripts Created/ Updated: - **vectorAdd_global_fixed.cu**, **vectorAdd_global_variable.cu**, **h2d_bandwidth_test.cu**, **alloc_benchmark.cu**
+
 ### What I Did
 
-- **vectorAdd_global_fixed.cu** – Executes vector addition on fixed-size global-memory arrays.
+- Executed vector addition on fixed-size global-memory arrays.
 
-- **vectorAdd_global_variable.cu** – Extends the previous kernel to accept runtime-specified vector sizes.
+- Extended the previous kernel to accept runtime-specified vector sizes.
 
-- **h2d_bandwidth_test.cu** – Measures Host‑to‑Device transfer bandwidth via cudaMemcpyAsync, comparing pageable memory (allocated with malloc) to pinned memory (allocated with cudaMallocHost).
+- Measured Host‑to‑Device transfer bandwidth via cudaMemcpyAsync, comparing pageable memory (allocated with malloc) to pinned memory (allocated with cudaMallocHost).
 
-- **alloc_benchmark.cu** – Times and contrasts allocation and transfer performance between pageable vs. pinned memory.
+- Timed and contrast allocation and transfer performance between pageable vs. pinned memory.
 
 ### Key Take Aways
 
@@ -44,7 +47,7 @@ High-performance CUDA math library implementations and contributions for NVIDIA 
 
 ### What I Read
 
-CUDA Programming Guide: Memory Management & Data Transfers sections.
+- CUDA Programming Guide: Memory Management & Data Transfers sections.
 
-NVIDIA blogs & forums: discussions of pageable vs. pinned memory trade‑offs and benchmarking practices.
+- NVIDIA blogs & forums: discussions of pageable vs. pinned memory trade‑offs and benchmarking practices.
 ```
