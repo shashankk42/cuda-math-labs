@@ -57,7 +57,7 @@ Scripts Created/ Updated: - **vectorAdd_shared.cu**
 
 ### Key Take Aways
 
-- __syncthreads() is block‑wide—keep control flow uniform; pad OOB lanes.
+- __syncthreads() is block‑wide; pad out of bound lanes.
 - Dynamic shared memory gives launch‑time tile sizing and contiguous packing; tiling preserves coalescing.
 - For pure vector add there’s no reuse, so shared memory is for learning the tiling + barrier discipline that does matter in reductions, stencils, and GEMM‑style kernels.
 
