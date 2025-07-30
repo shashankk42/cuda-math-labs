@@ -51,6 +51,7 @@ Scripts Created/ Updated: - **vectorAdd_shared.cu**
 
 ### What I Did
 
+- Switched to C++ style code 
 - Implemented a grid‑stride, tiled vector add using dynamic shared memory (sA, sB).
 - Applied stage -> __syncthreads() -> compute -> __syncthreads() with coalesced global loads/stores.
 - Guarded partial tiles (i < N, zero‑fill), parsed digits‑only N (default 2^24), and validated via max |error|.
