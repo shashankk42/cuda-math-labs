@@ -76,7 +76,6 @@ Scripts Created/ Updated: - **compare_with_cublas.cu**
 - Implemented two FP32 GEMM kernels:
     - naive: each thread computes one C(i,j) with direct global loads.
     - tiled: blocks cooperatively load T×T tiles of A and B into dynamic shared memory and reuse them across the inner‐k loop.
-
 - Accepted runtime sizes and options: ./compare_with_cublas M N K --kernel naive|tiled --tile T.
 - Timed kernels with CUDA events; computed FLOPs as 2*M*N*K, then reported GFLOP/s.
 - Called cuBLAS SGEMM on the same inputs and reported its GFLOP/s.
