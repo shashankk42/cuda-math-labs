@@ -66,3 +66,32 @@ Scripts Created/ Updated: - **vectorAdd_shared.cu**
 
 - CUDA C++ Programming Guide: Shared Memory; Thread Synchronization.
 - CUDA Best Practices Guide: Memory Coalescing; Grid‑Stride Loops.
+
+
+## Day 4: GEMM — Naive vs Tiled vs cuBLAS 
+
+Scripts Created/ Updated: - **compare_with_cublas.cu**
+
+### What I Did
+- Implemented two FP32 GEMM kernels:
+    - naive: each thread computes one C(i,j) with direct global loads.
+    - tiled: blocks cooperatively load T×T tiles of A and B into dynamic shared memory and reuse them across the inner‐k loop.
+
+- Accepted runtime sizes and options: ./compare_with_cublas M N K --kernel naive|tiled --tile T.
+- Timed kernels with CUDA events; computed FLOPs as 2*M*N*K, then reported GFLOP/s.
+- Called cuBLAS SGEMM on the same inputs and reported its GFLOP/s.
+
+
+### Key Take Aways
+
+- Shared-memory tiling increases data reuse and reduces global memory traffic.
+- Use CUDA events for stable kernel timings (record, synchronize, elapsed_ms).
+- cuBLAS SGEMM is a strong baseline. (8-9x faster compared to manual tiled GEMM implementation)
+    - Need to read more for the reasons
+
+### What I Read: 
+
+- CUDA C++ Programming Guide: Matrix Multiply & Shared Memory tiling patterns.
+- cuBLAS Library User Guide: SGEMM behavior, math modes, and Tensor Core notes.
+- CUTLASS docs/tutorials: block-tiling, warp-tiling, pipelining, and epilogue design.
+- Roofline model articles: relating Arithmetic Intensity to achievable performance.
