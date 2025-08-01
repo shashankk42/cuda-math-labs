@@ -88,9 +88,34 @@ Scripts Created/ Updated: - **compare_with_cublas.cu**
 - cuBLAS SGEMM is a strong baseline. (8-9x faster compared to manual tiled GEMM implementation)
     - Need to read more for the reasons
 
-### What I Read: 
+### What I Read 
 
 - CUDA C++ Programming Guide: Matrix Multiply & Shared Memory tiling patterns.
 - cuBLAS Library User Guide: SGEMM behavior, math modes, and Tensor Core notes.
 - CUTLASS docs/tutorials: block-tiling, warp-tiling, pipelining, and epilogue design.
 - Roofline model articles: relating Arithmetic Intensity to achievable performance.
+
+
+## Day 5: Roofline — Manual & Nsight Validation
+
+Scripts Created/ Updated: - **roofline_demo.cu, plot_roofline.py**
+
+### What I Did
+- Wrote roofline_demo.cu to launch and time two kernels:
+    - vecAdd (memory-bound) and compHeavy (compute-heavy).
+    - Computed per-kernel metrics and printed CSV:
+        - runtime (ms), FLOPs, GFLOP/s, moved bytes, GB/s, Arithmetic Intensity (AI = FLOPs/Byte), and kernel name.
+- Profiled the executable with Nsight Compute and saved a .ncu-rep report to inspect achieved occupancy, memory throughput %, and FP32 utilization.
+- Wrote plot_roofline.py to read the CSV and generate a roofline plot:
+    - draws the bandwidth roof (peak_bandwidth × AI) and compute roof (flat peak GFLOP/s line),
+    - places points for vecAdd and compHeavy with labels, and saves roofline_plot.png.
+
+### Key Take Aways
+- The roofline point of a kernel is fully determined by (AI, performance):
+    - low-AI kernels (e.g., vecAdd) sit on the bandwidth slope; high-AI kernels approach the compute roof.
+- Nsight Compute confirms where time goes; e.g., occupancy gaps and scoreboard stalls explain sub-roof performance for memory-bound code.
+- A correct AI requires counting both reads and writes (and all reused data paths); errors there shift points horizontally and mislead conclusions.
+
+### What I Read
+- CUDA C++ Programming Guide: Performance metrics & timing with CUDA events.
+- Nsight Compute User Guide: Roofline, Occupancy, and Memory Throughput sections.
